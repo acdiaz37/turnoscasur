@@ -5,7 +5,7 @@ export const GestorContext = createContext();
 
 const GestorProvider = (props)=>{   
 
-    const [paginadorGestorT, setpaginadorGestorT] = useState(1)   
+    const [paginadorGestorT, setpaginadorGestorT] = useState(2)   
 
 return(
     <GestorContext.Provider

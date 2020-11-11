@@ -1,5 +1,5 @@
 import React from 'react'
-import FormularioProvider from '../../context/contextGestor';
+import GestorProvider from '../../context/contextGestor';
 import GestionTurnos from './GestionTurnos';
 
 const ContenedorGestor = () => {

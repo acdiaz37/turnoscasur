@@ -23,7 +23,7 @@ const BotonesTipoTurno = () => {
     return ( <>
          {tipoTurno.map(tipo=>
             <button 
-                className="btn btn-success my-1 mx-1"
+                className="btn btn-success btn-sm my-1 mx-1"
                 onClick={clickingBoton}
                 value={tipo}
                 name='tipoTurno'                             

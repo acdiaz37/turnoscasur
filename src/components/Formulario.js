@@ -15,8 +15,8 @@ const Formulario = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href>Why do I have this issue?</a>'
+                text: 'No ha autorizado el uso de sus datos!',
+                footer: ''
               })
         }
         else{   
@@ -37,10 +37,22 @@ const Formulario = () => {
 
     return (         
         <>
-        {paginador===1 && <><h2>Diligencia el formulario</h2>
+        {paginador===1 && <>
+        <div className="bg-light p-5 m-1 border border-dark">
+        <h2 className="mb-2">Diligencia el formulario</h2>
+        
         <form onSubmit={submitFormulario}>
-            <div className="form-group ">
-                <label className="font-weight-bolder">Tipo de Identificaci[on</label>
+            <div className="form-group">
+                <label className="font-weight-bolder">Tipo de Afiliación</label>
+
+                <select onChange={handleFormulario} name='tipoAfiliacion' className='form-control'>
+                    <option>Titular Asignación</option>
+                    <option>Beneficiario</option>
+                    <option>Otro</option>                    
+                </select>
+
+                <label className="font-weight-bolder">Tipo de Identificación</label>
+
                 <select onChange={handleFormulario} name='tipoIdentificacion' className='form-control'>
                     <option>Cedula de Ciudadania</option>
                     <option>NIT</option>
@@ -48,7 +60,7 @@ const Formulario = () => {
                     <option>Cedula de Extrangeria</option>
                 </select>             
 
-                <label className="font-weight-bolder">Numero de documento</label>
+                <label className="font-weight-bolder">Número de documento</label>
                 <input 
                     name='numeroDocumento' 
                     className='form-control' 
@@ -65,7 +77,7 @@ const Formulario = () => {
 
                 <label
                     className='mt-5'
-                >Autorizo el uso de informacion Personal a la Caja de Sueldos de Retiro de la Policia Nacional? *</label>
+                >¿Autoriza el uso de información Personal a la Caja de Sueldos de Retiro de la Policía Nacional? </label>
                 <select onChange={handleFormulario} name='autorizaDatos' className='form-control'>
                     <option>Si</option>
                     <option>No</option>                    
@@ -76,7 +88,9 @@ const Formulario = () => {
 
                 <button type="submit" className="btn btn-primary mt-3 btn-block">Continuar</button>
             </div>
-        </form></>} 
+        </form>
+        </div>
+</>} 
         {paginador===5 && <><Bienvenida/></>} 
         {paginador===2 && <><DatosContacto/></>} 
         {paginador===3 && <><TipoTurno/></>} 

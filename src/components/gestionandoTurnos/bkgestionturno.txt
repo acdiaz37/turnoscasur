@@ -7,19 +7,13 @@ import {FormularioContext} from '../../context/contextFormulario';
 import NavBarGestionando from './NavBarGestionando'
 import SiguienteTurno from './SiguienteTurno'
 import MostrandoHistoricos from './MostrandoHistoricos'
-import IndexNuevoGestiont from './nuevoGestorTurnos/IndexNuevoGestiont'
-import ListadoSinGestionar from './listadoTurnosMax/ListadoSinGestionar'
-import ListadoTramitadosOk from './listadoTurnosMax/ListadoTramitadosOk'
 
 
 
 const GestionTurnos = () => {
 
     const obteniendoTurnos= async() =>{
-        db.collection("datosturno")
-        .where("estadoSolicitud", "==", "Sin Gestionar")        
-        .orderBy('TurnoAsignado', 'asc')
-        .onSnapshot(
+        db.collection("datosturno").orderBy('TurnoAsignado', 'asc').onSnapshot(
             (querySnapshot)=>{
                 const docs = []
                 querySnapshot.forEach(doc =>{                       
@@ -27,7 +21,7 @@ const GestionTurnos = () => {
                         {...doc.data(), id:doc.id})
                 })
                 setguardandoConsultaTurnos(docs)
-                
+                console.log(docs)
         })
         
     };
@@ -50,8 +44,8 @@ const GestionTurnos = () => {
         
         //setestadook(guardandoConsultaTurnos.filter(ok=> ok.estadoSolicitud === 'ok'))
         
-       /*  console.log('mostrando estados ok ')
-        console.log(estadook) */
+        console.log('mostrando estados ok ')
+        console.log(estadook)
         
     }
 
@@ -62,7 +56,10 @@ const GestionTurnos = () => {
 
     useEffect(() => {
         
-        obteniendoTurnos()          
+        obteniendoTurnos()   
+//        obteniendoEstados()
+
+        
         
     }, [])
 
@@ -72,11 +69,8 @@ const GestionTurnos = () => {
         <NavBarGestionando/>
         {paginadorGestor === 1 && <><LoginGestionTurnos/></>}
         {paginadorGestor === 4 && <><MostrandoHistoricos/></>}
-        {paginadorGestor === 3 && <><IndexNuevoGestiont/></>}
         {paginadorGestor === 2 && <NombreAsesor/>}
-        {paginadorGestor === 6 && <ListadoSinGestionar/>}
-        {paginadorGestor === 7 && <ListadoTramitadosOk/>}
-        {paginadorGestor === 5 && <>
+        {paginadorGestor === 3 && <>
             <div className="">
             <div className="mt-3 container">
             <div className="row justify-content-cente">

@@ -1,5 +1,6 @@
   
 import React from "react";
+import './components/FontawesomeIcons'
 import Routes from './Routes';
 
 

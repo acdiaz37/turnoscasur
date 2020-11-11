@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.overflow-scrolling {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}

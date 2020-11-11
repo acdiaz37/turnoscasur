@@ -1,14 +1,15 @@
 import React, {useContext, useEffect} from 'react'
 import {FormularioContext} from '../context/contextFormulario';
 import {db} from '../firebase'
+import useConsultaCantidadTurnos from '../components/Hooks/useConsultaCantidadTurnos';
 
 
 
 const MostrantoTurno = () => {
     
-    const { datosFormulario, ultimoturno} = useContext(FormularioContext);
+    const { datosFormulario, cantidadTurnos} = useContext(FormularioContext);
 
-    const guardandoRegistros = async() =>{
+    const guardandoRegistros = async() =>{      
       await db.collection('datosturno').doc().set(datosFormulario) 
     }
 
@@ -21,23 +22,42 @@ const MostrantoTurno = () => {
     }, []) */
 
     useEffect(() => {
-      guardandoRegistros()
+      guardandoRegistros()      
+      
+
     }, [])
+
+    useEffect(() => {
+      
+    }, [])
+
+    const [ consultaDBturnos] = useConsultaCantidadTurnos()
+
+    
 
     return ( 
         <>
-        <h2 className="text-center">Señor(a)<strong>{datosFormulario.nombreCiudadano}</strong> Se le ha asigando el turno:</h2>
+        <div className="bg-light p-5 m-1 border border-dark">
+        <h3 className="text-center">Señor(a)<strong>{datosFormulario.nombreCiudadano}</strong> Se le ha asignado el turno:</h3>
         <h1 className="bg-success text-center mb-3">00{datosFormulario.TurnoAsignado}</h1>
         <div className="border border-success mb-4">
-            <h6><strong>Identifiación: </strong>{datosFormulario.numeroDocumento}</h6>
+            <h6><strong>Identificación: </strong>{datosFormulario.numeroDocumento}</h6>
             <h6><strong>Correo: </strong>{datosFormulario.correoElectronico}</h6>
             <h6><strong>Celular: </strong>{datosFormulario.numeroCelular}</h6>
         </div>       
         
-        <p>En breve un asesor se comunicará con usted a los datos de contacto que nos ha suministrado, puede visualizar la secuencia de turnos en el siguiente link</p>
+        <p className="text-center"><strong className='text-white bg-primary px-3'>Por favor tome atenta nota al turno asignado</strong> </p>
+        
+        <p className="text-justify">En breve un asesor se comunicará con usted a los datos de contacto que nos ha suministrado. Su turno será gestionado por teleorientación.</p>
+        <hr/>
+        <p className="text-center">Mantenga atento al llamado de nuestros teleorientadores, ya que su ausencia implicará tomar un nuevo turno</p>
+
+
+        
         
         <div className="text-center">
-          <button className="btn btn-primary">Seguimiento de turnos(Not working yet)</button>
+          <a href="/turnos" className="btn btn-primary btn-block">Seguimiento de turnos</a>
+        </div>
         </div>
         </>        
       );
